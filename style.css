@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+    /* outline: 1px solid rgba(0, 200, 255, 1); */
+}
+:root {
+    /* --button-color-digit1: #fff; */
+    --button-color-digit: #444;
+    --button-color-operator: #f90;
+    --button-size-width: 4.5rem;
+    --button-size-height: 3.5rem;
+}
+body {
+    background: radial-gradient(#eee, #ccc);
+}
+.page-container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.device-frame {
+    background: black;
+    padding: 1rem;
+    border-radius: 4rem;
+    display: flex;
+}
+.buttons-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    gap: 5px;
+}
+button {
+    width: var(--button-size-width);
+    height: var(--button-size-height);
+    border-width: 0;
+    border-radius: 2rem;
+    color: white;
+    font-size: 2rem;
+    background: #ccc;
+}
+.digit {
+    background: var(--button-color-digit);
+}
+[data-number="0"] {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    width: calc(2 * var(--button-size-width));
+}
+.operator,
+.equals {
+    background: var(--button-color-operator);
+}
