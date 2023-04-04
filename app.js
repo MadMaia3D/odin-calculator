@@ -20,7 +20,7 @@ function operate(operator, number1, number2) {
     return result;
 }
 
-let first_input = "";
+let currentInput = "";
 
 const displayCurrentInput = document.querySelector(".display .current-input");
 const buttons = document.querySelectorAll("button");
@@ -36,11 +36,17 @@ buttons.forEach((button) => {
 });
 
 function addDigit(event) {
-    first_input += event.target.dataset.number;
-    displayCurrentInput.textContent = first_input;
+    const digitInput = event.target.dataset.number;
+    currentInput += digitInput;
+    currentInput = removeTrailingZeros(currentInput);
+    displayCurrentInput.textContent = currentInput;
+}
+
+function removeTrailingZeros(stringNumber) {
+    return Number(stringNumber).toString();
 }
 
 function clear() {
-    first_input = "";
+    currentInput = "";
     displayCurrentInput.textContent = "0";
 }
