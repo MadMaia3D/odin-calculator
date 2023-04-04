@@ -33,6 +33,7 @@ body {
     background: #ddd;
     margin-bottom: 1rem;
     border-radius: 4px;
+    height: 6rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
