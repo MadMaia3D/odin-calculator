@@ -40,10 +40,20 @@ function addDigit(event) {
     currentInput += digitInput;
     currentInput = removeTrailingZeros(currentInput);
     displayCurrentInput.textContent = currentInput;
+    console.log(currentInput);
 }
 
 function removeTrailingZeros(stringNumber) {
-    return Number(stringNumber).toString();
+    if (stringNumber.slice(0, 2) == "0.") {
+        return stringNumber;
+    }
+    while (stringNumber.charAt() === "0") {
+        stringNumber = stringNumber.substring(1);
+    }
+    if (stringNumber.length === 0) {
+        stringNumber = "0";
+    }
+    return stringNumber;
 }
 
 function addSeparator() {
@@ -55,6 +65,7 @@ function addSeparator() {
     }
     currentInput += ".";
     displayCurrentInput.textContent = currentInput;
+    console.log(currentInput);
 }
 
 function clear() {
