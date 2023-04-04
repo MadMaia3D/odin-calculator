@@ -28,9 +28,9 @@ const buttons = document.querySelectorAll("button");
 buttons.forEach((button) => {
     if (button.classList.contains("digit")) {
         button.addEventListener("click", addDigit);
-    }
-
-    if (button.classList.contains("clear")) {
+    } else if (button.classList.contains("separator")) {
+        button.addEventListener("click", addSeparator);
+    } else if (button.classList.contains("clear")) {
         button.addEventListener("click", clear);
     }
 });
@@ -44,6 +44,17 @@ function addDigit(event) {
 
 function removeTrailingZeros(stringNumber) {
     return Number(stringNumber).toString();
+}
+
+function addSeparator() {
+    if (currentInput.includes(".")) {
+        return;
+    }
+    if (currentInput.length === 0) {
+        currentInput += "0";
+    }
+    currentInput += ".";
+    displayCurrentInput.textContent = currentInput;
 }
 
 function clear() {
