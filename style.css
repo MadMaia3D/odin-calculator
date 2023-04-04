@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&display=swap");
 * {
     margin: 0;
     padding: 0;
@@ -8,14 +9,13 @@
     /* outline: 1px solid rgba(0, 200, 255, 1); */
 }
 :root {
-    /* --button-color-digit1: #fff; */
     --button-color-digit: #444;
     --button-color-operator: #f90;
     --button-size-width: 4.5rem;
     --button-size-height: 3.5rem;
 }
 body {
-    background: radial-gradient(#eee, #ccc);
+    background: radial-gradient(#ccc, #aaa);
 }
 .page-container {
     height: 100vh;
@@ -26,9 +26,30 @@ body {
 }
 .device-frame {
     background: black;
-    padding: 1rem;
-    border-radius: 4rem;
+    padding: 3rem 1rem 2rem 1rem;
+    border-radius: 3rem;
+}
+.display {
+    background: #ddd;
+    margin-bottom: 1rem;
+    border-radius: 4px;
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.display * {
+    font-family: "Orbitron", sans-serif;
+    margin-right: 4px;
+}
+.previous-input {
+    font-size: 1.5rem;
+}
+.operator-input {
+    margin-right: 8px;
+}
+.current-input {
+    font-size: 2rem;
 }
 .buttons-container {
     display: grid;
@@ -43,7 +64,7 @@ button {
     border-radius: 2rem;
     color: white;
     font-size: 2rem;
-    background: #ccc;
+    background: #aaa;
 }
 .digit {
     background: var(--button-color-digit);
