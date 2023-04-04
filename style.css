@@ -66,7 +66,8 @@ button {
     font-size: 2rem;
     background: #aaa;
 }
-.digit {
+.digit,
+.separator {
     background: var(--button-color-digit);
 }
 [data-number="0"] {
