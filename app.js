@@ -33,6 +33,12 @@ buttons.forEach((button) => {
     } else if (button.classList.contains("clear")) {
         button.addEventListener("click", clear);
     }
+    if (button.classList.contains("operator")) {
+        button.addEventListener("click", inputOperator);
+    }
+    if (button.classList.contains("equals")) {
+        button.addEventListener("click", tryToOperate);
+    }
 });
 
 function addDigit(event) {
@@ -66,6 +72,19 @@ function addSeparator() {
     currentInput += ".";
     displayCurrentInput.textContent = currentInput;
     console.log(currentInput);
+}
+
+function tryToOperate() {
+    if (storedOperator && previousInput && displayCurrentInput.textContent) {
+        const result = operate(
+            storedOperator,
+            previousInput,
+            displayCurrentInput.textContent
+        );
+        previousInput = result;
+        displayPreviousInput.textContent = previousInput;
+        currentInput = "";
+    }
 }
 
 function clear() {
