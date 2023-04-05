@@ -67,16 +67,15 @@ button {
     font-size: 2rem;
     background: #aaa;
 }
-.digit,
-.separator {
+[data-number] {
     background: var(--button-color-digit);
 }
-[data-number="0"] {
+.span-two {
     grid-column-start: 1;
     grid-column-end: 3;
     width: calc(2 * var(--button-size-width));
 }
-.operator,
-.equals {
+[data-operator],
+[data-equals] {
     background: var(--button-color-operator);
 }
