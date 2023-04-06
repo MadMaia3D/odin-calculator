@@ -15,6 +15,9 @@ class Calculator {
     }
 
     selectOperand(entry) {
+        this.displayBottom.textContent = this.formatNumber(
+            this.displayBottom.textContent
+        );
         if (this.operator && this.operator != entry) {
             this.operator = entry;
             return;
@@ -54,13 +57,12 @@ class Calculator {
     }
 
     formatNumber(number) {
-        return Number(number.toFixed(8));
+        const convertedNumber = Number(number);
+        return Number(convertedNumber.toFixed(8));
     }
 
     updateDisplayTop() {
-        this.displayTop.textContent = this.formatNumber(
-            Number(this.secondOperand)
-        );
+        this.displayTop.textContent = this.formatNumber(this.secondOperand);
     }
     updateDisplayMiddle() {
         this.displayMiddle.textContent = this.operator;
@@ -91,6 +93,7 @@ const numberButtons = document.querySelectorAll("[data-number]");
 const operatorButtons = document.querySelectorAll("[data-operator]");
 const equalsButton = document.querySelector("[data-equals]");
 const clearButton = document.querySelector("[data-clear]");
+const eraseButton = document.querySelector("[data-erase]");
 
 numberButtons.forEach(function (button) {
     button.addEventListener("click", () => {
