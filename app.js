@@ -11,7 +11,7 @@ class Calculator {
     appendNumber(entry) {
         if (entry === "." && this.firstOperand.includes(".")) return;
         if (entry === "." && !this.firstOperand) this.firstOperand += "0";
-        this.firstOperand += entry.toString();
+        this.firstOperand += entry;
     }
 
     selectOperand(entry) {
@@ -31,6 +31,7 @@ class Calculator {
         this.firstOperand = "";
     }
     operate() {
+        if (!this.operator) return;
         const lhs = Number(this.displayTop.textContent);
         const rhs = Number(this.displayBottom.textContent);
         let result;
@@ -57,6 +58,7 @@ class Calculator {
     }
 
     formatNumber(number) {
+        if (!number) return number;
         const convertedNumber = Number(number);
         return Number(convertedNumber.toFixed(8));
     }
@@ -87,6 +89,11 @@ class Calculator {
         this.firstOperand = "0";
         this.updateDisplayBottom();
     }
+    eraseLastDigit() {
+        this.firstOperand = this.displayBottom.textContent;
+        this.firstOperand = this.firstOperand.slice(0, -1);
+        if (!this.firstOperand) this.firstOperand = "0";
+    }
 }
 
 const displayTop = document.querySelector("[data-display-top]");
@@ -96,6 +103,7 @@ const displayBottom = document.querySelector("[data-display-bottom]");
 const numberButtons = document.querySelectorAll("[data-number]");
 const operatorButtons = document.querySelectorAll("[data-operator]");
 const equalsButton = document.querySelector("[data-equals]");
+
 const clearButton = document.querySelector("[data-clear]");
 const clearEntryButton = document.querySelector("[data-clear-entry]");
 const eraseButton = document.querySelector("[data-erase]");
@@ -126,6 +134,11 @@ clearButton.addEventListener("click", () => {
 
 clearEntryButton.addEventListener("click", () => {
     calculator.clearEntry();
+});
+
+eraseButton.addEventListener("click", () => {
+    calculator.eraseLastDigit();
+    calculator.updateDisplayBottom();
 });
 
 const calculator = new Calculator(displayTop, displayMiddle, displayBottom);
