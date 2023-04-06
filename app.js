@@ -83,6 +83,10 @@ class Calculator {
         this.displayMiddle.innerText = "";
         this.displayBottom.innerText = "0";
     }
+    clearEntry() {
+        this.firstOperand = "0";
+        this.updateDisplayBottom();
+    }
 }
 
 const displayTop = document.querySelector("[data-display-top]");
@@ -93,6 +97,7 @@ const numberButtons = document.querySelectorAll("[data-number]");
 const operatorButtons = document.querySelectorAll("[data-operator]");
 const equalsButton = document.querySelector("[data-equals]");
 const clearButton = document.querySelector("[data-clear]");
+const clearEntryButton = document.querySelector("[data-clear-entry]");
 const eraseButton = document.querySelector("[data-erase]");
 
 numberButtons.forEach(function (button) {
@@ -117,6 +122,10 @@ equalsButton.addEventListener("click", () => {
 
 clearButton.addEventListener("click", () => {
     calculator.clear();
+});
+
+clearEntryButton.addEventListener("click", () => {
+    calculator.clearEntry();
 });
 
 const calculator = new Calculator(displayTop, displayMiddle, displayBottom);

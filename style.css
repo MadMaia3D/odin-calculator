@@ -9,8 +9,15 @@
     /* outline: 1px solid rgba(0, 200, 255, 1); */
 }
 :root {
-    --button-color-digit: #444;
+    --button-color-digit: #333;
+    --button-color-digit-hover: #444;
+    --button-color-digit-press: #888;
+    --button-color-utility: #bbb;
+    --button-color-utility-hover: #ccc;
+    --button-color-utility-press: #eee;
     --button-color-operator: #f90;
+    --button-color-operator-hover: #fa0;
+    --button-color-operator-press: #fc0;
     --button-size-width: 4.5rem;
     --button-size-height: 3.5rem;
 }
@@ -66,12 +73,28 @@ button {
     height: var(--button-size-height);
     border-width: 0;
     border-radius: 2rem;
-    color: white;
     font-size: 2rem;
-    background: #aaa;
 }
+button.utility {
+    color: black;
+    background: var(--button-color-utility);
+}
+button.utility:hover {
+    background: var(--button-color-utility-hover);
+}
+button.utility:active {
+    background: var(--button-color-utility-press);
+}
+
 [data-number] {
+    color: white;
     background: var(--button-color-digit);
+}
+[data-number]:hover {
+    background: var(--button-color-digit-hover);
+}
+[data-number]:active {
+    background: var(--button-color-digit-press);
 }
 .span-two {
     grid-column-start: 1;
@@ -80,5 +103,14 @@ button {
 }
 [data-operator],
 [data-equals] {
+    color: white;
     background: var(--button-color-operator);
+}
+[data-operator]:hover,
+[data-equals]:hover {
+    background: var(--button-color-operator-hover);
+}
+[data-operator]:active,
+[data-equals]:active {
+    background: var(--button-color-operator-press);
 }
