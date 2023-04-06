@@ -11,6 +11,7 @@ class Calculator {
     appendNumber(entry) {
         if (entry === "." && this.firstOperand.includes(".")) return;
         if (entry === "." && !this.firstOperand) this.firstOperand += "0";
+        if (entry === "0" && this.firstOperand === "0") return;
         this.firstOperand += entry;
     }
 
