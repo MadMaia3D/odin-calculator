@@ -43,14 +43,17 @@ body {
     font-family: "Orbitron", sans-serif;
     margin-right: 4px;
 }
-.previous-input {
+.display .top {
     font-size: 1.5rem;
+    height: 30px;
 }
-.operator-input {
-    margin-right: 8px;
+.display .middle {
+    /* margin-right: 8px; */
+    height: 20px;
 }
-.current-input {
+.display .bottom {
     font-size: 2rem;
+    height: 40px;
 }
 .buttons-container {
     display: grid;
