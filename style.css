@@ -1,0 +1,69 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&family=Mulish&family=Roboto:wght@100;400;500&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* outline: 1px solid red; */
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: gray;
+}
+
+.calculator-body {
+    width: 350px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #111;
+}
+.display {
+    background-color: #222;
+    height: 80px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    color: white;
+    text-align: right;
+    font-size: 1.5rem;
+}
+.display .top-row {
+    height: 50%;
+    font-weight: 100;
+}
+.display .bottom-row {
+    height: 50%;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+.buttons-container {
+    height: 350px;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+button {
+    font-family: "Roboto", sans-serif;
+    box-shadow: 1px 2px 3px 1px black;
+    background-color: #333;
+    color: #fff;
+    font-size: 1.5rem;
+    border-radius: 10px;
+    border: none;
+}
+button:hover {
+    background-color: #444;
+}
+button:active {
+    background-color: #888;
+}
+[data-number="0"] {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
