@@ -102,8 +102,9 @@ class Calculator {
         if (this.isInputsEmpty()) {
             return;
         }
-        // If the last array item is a number, push the operator to the array
+        // If the last array item is a number, format it to number then push the operator to the array
         if (this.isLastInputNumeric()) {
+            this.setLastInput(Number(this.getLastInput()).toString());
             this.inputs.push(currentInput);
         }
         // If the last array items is an operator, substitute it with the new operator
