@@ -6,6 +6,7 @@ class Calculator {
         this.separatorButton = document.querySelector(".separator");
         this.operatorButtons = document.querySelectorAll(".operator");
         this.eraseButton = document.querySelector(".erase");
+        this.clearButton = document.querySelector(".clear");
         this.clearEntryButton = document.querySelector(".clear-entry");
         this.displayTopRow = document.querySelector(".display .top-row");
 
@@ -13,6 +14,7 @@ class Calculator {
         this.insertDecimalSeparator = this.insertDecimalSeparator.bind(this);
         this.operatorInput = this.insertOperator.bind(this);
         this.erase = this.erase.bind(this);
+        this.clearAll = this.clearAll.bind(this);
         this.clearEntry = this.clearEntry.bind(this);
         this.displayCurrentInput = this.displayCurrentInput.bind(this);
 
@@ -34,6 +36,10 @@ class Calculator {
         );
         this.eraseButton.addEventListener("click", () => {
             this.erase();
+            this.displayCurrentInput();
+        });
+        this.clearButton.addEventListener("click", () => {
+            this.clearAll();
             this.displayCurrentInput();
         });
         this.clearEntryButton.addEventListener("click", () => {
@@ -140,6 +146,10 @@ class Calculator {
                 this.inputs = this.inputs.slice(0, -1);
             }
         }
+    }
+
+    clearAll() {
+        this.inputs = [];
     }
 
     clearEntry() {
