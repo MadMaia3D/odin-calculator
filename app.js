@@ -7,6 +7,7 @@ class Calculator {
         this.operatorButtons = document.querySelectorAll(".operator");
         this.eraseButton = document.querySelector(".erase");
         this.clearEntryButton = document.querySelector(".clear-entry");
+        this.displayTopRow = document.querySelector(".display .top-row");
 
         this.numberInput = this.insertNumber.bind(this);
         this.insertDecimalSeparator = this.insertDecimalSeparator.bind(this);
@@ -146,8 +147,8 @@ class Calculator {
     }
 
     displayCurrentInput() {
-        console.clear();
-        console.log(this.inputs);
+        const displayValue = this.inputs.join(" ");
+        this.displayTopRow.textContent = displayValue;
     }
 }
 
