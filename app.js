@@ -1,6 +1,5 @@
 class Calculator {
     constructor() {
-        this.currentInput = "";
         this.inputs = [];
 
         this.numberButtons = document.querySelectorAll(".number");
@@ -12,15 +11,28 @@ class Calculator {
         this.operatorInput = this.operatorInput.bind(this);
         this.erase = this.erase.bind(this);
         this.clearEntry = this.clearEntry.bind(this);
+        this.displayCurrentInput = this.displayCurrentInput.bind(this);
 
         this.numberButtons.forEach((button) =>
-            button.addEventListener("click", this.numberInput)
+            button.addEventListener("click", (event) => {
+                this.numberInput(event);
+                this.displayCurrentInput();
+            })
         );
         this.operatorButtons.forEach((button) =>
-            button.addEventListener("click", this.operatorInput)
+            button.addEventListener("click", (event) => {
+                this.operatorInput(event);
+                this.displayCurrentInput();
+            })
         );
-        this.eraseButton.addEventListener("click", this.erase);
-        this.clearEntryButton.addEventListener("click", this.clearEntry);
+        this.eraseButton.addEventListener("click", () => {
+            this.erase();
+            this.displayCurrentInput();
+        });
+        this.clearEntryButton.addEventListener("click", () => {
+            this.clearEntry();
+            this.displayCurrentInput();
+        });
     }
 
     numberInput(event) {
@@ -29,12 +41,10 @@ class Calculator {
         // If the array is empty or if the last array item is an operator, push the digit to the array
         if (this.isInputsEmpty() || this.isLastInputOperator()) {
             this.inputs.push(currentInput);
-            console.log(this.inputs);
             return;
         }
         // If the last array item is a number, append the digit to it
         this.appendDigit(currentInput);
-        console.log(this.inputs);
     }
 
     isInputsEmpty() {
@@ -67,7 +77,9 @@ class Calculator {
         this.currentInput = event.currentTarget.dataset.operation;
 
         // If the array is empty, don't do anything
-        if (this.isInputsEmpty()) return;
+        if (this.isInputsEmpty()) {
+            return;
+        }
         // If the last array item is a number, push the operator to the array
         if (this.isLastInputNumeric()) {
             this.inputs.push(this.currentInput);
@@ -76,7 +88,6 @@ class Calculator {
         if (this.isLastInputOperator()) {
             this.setLastInput(this.currentInput);
         }
-        console.log(this.inputs);
     }
 
     equals() {
@@ -87,24 +98,33 @@ class Calculator {
     }
 
     erase() {
-        this.currentInput = this.currentInput.slice(0, -1);
-        this.logCurrentInput();
-        /*
-        If the array is empty, don't do anything
-        - If the last array item is an operator, delete it
-           - else if the last array item is not empty, erase the last digit of it
-               - if the last array item is empty, delete it
-        */
+        // If the array is empty, don't do anything
+        if (this.isInputsEmpty()) {
+            return;
+        }
+        // If the last array item is an operator, delete it
+        if (this.isLastInputOperator()) {
+            this.inputs = this.inputs.slice(0, -1);
+            return;
+        }
+        // if the last array item is not empty, erase the last digit of it
+        // then if the last array item is empty, delete it
+        if (this.isLastInputNumeric()) {
+            const newValue = this.getLastInput().slice(0, -1);
+            this.setLastInput(newValue);
+            if (this.getLastInput().length === 0) {
+                this.inputs = this.inputs.slice(0, -1);
+            }
+        }
     }
 
     clearEntry() {
-        this.currentInput = "";
-        this.logCurrentInput();
+        this.inputs = [];
     }
 
-    logCurrentInput() {
+    displayCurrentInput() {
         console.clear();
-        console.log(this.currentInput);
+        console.log(this.inputs);
     }
 }
 
