@@ -143,7 +143,7 @@ class Calculator {
     }
 
     clearEntry() {
-        this.inputs = [];
+        this.inputs.pop();
     }
 
     displayCurrentInput() {
