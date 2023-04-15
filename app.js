@@ -147,7 +147,7 @@ class Calculator {
     }
 
     displayCurrentInput() {
-        let displayValue = this.inputs.join(" ");
+        let displayValue = this.inputs.join("");
 
         const divisionSymbol = "\u{00F7}";
         const multiplicationSymbol = "\u{00D7}";
