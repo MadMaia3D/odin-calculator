@@ -80,32 +80,6 @@ class Calculator {
         }
     }
 
-    isInputsEmpty() {
-        return !Boolean(this.inputs.length);
-    }
-    isLastInputNumeric() {
-        const lastInput = this.getLastInput();
-        return !isNaN(lastInput);
-    }
-    isLastInputOperator() {
-        const lastInput = this.getLastInput();
-        const regexp = new RegExp(/[/*\-+]/g);
-        return regexp.test(lastInput);
-    }
-    getLastInput() {
-        const lastIndex = this.inputs.length - 1;
-        const lastInput = this.inputs[lastIndex];
-        return lastInput;
-    }
-    setLastInput(value) {
-        const lastIndex = this.inputs.length - 1;
-        this.inputs[lastIndex] = value;
-    }
-    appendDigit(digit) {
-        const lastIndex = this.inputs.length - 1;
-        this.inputs[lastIndex] += digit;
-    }
-
     insertOperator(event) {
         const currentInput = event.currentTarget.dataset.operation;
 
@@ -152,14 +126,6 @@ class Calculator {
         }
     }
 
-    clearAll() {
-        this.inputs = [];
-    }
-
-    clearEntry() {
-        this.inputs.pop();
-    }
-
     displayCurrentInput() {
         let displayValue = this.getInputAsString();
 
@@ -171,6 +137,37 @@ class Calculator {
         this.displayTopRow.textContent = displayValue;
     }
 
+    clearAll() {
+        this.inputs = [];
+    }
+    clearEntry() {
+        this.inputs.pop();
+    }
+    isInputsEmpty() {
+        return !Boolean(this.inputs.length);
+    }
+    isLastInputNumeric() {
+        const lastInput = this.getLastInput();
+        return !isNaN(lastInput);
+    }
+    isLastInputOperator() {
+        const lastInput = this.getLastInput();
+        const regexp = new RegExp(/[/*\-+]/g);
+        return regexp.test(lastInput);
+    }
+    getLastInput() {
+        const lastIndex = this.inputs.length - 1;
+        const lastInput = this.inputs[lastIndex];
+        return lastInput;
+    }
+    setLastInput(value) {
+        const lastIndex = this.inputs.length - 1;
+        this.inputs[lastIndex] = value;
+    }
+    appendDigit(digit) {
+        const lastIndex = this.inputs.length - 1;
+        this.inputs[lastIndex] += digit;
+    }
     getInputAsString() {
         return this.inputs.join("");
     }
