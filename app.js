@@ -3,11 +3,13 @@ class Calculator {
         this.inputs = [];
 
         this.numberButtons = document.querySelectorAll(".number");
+        this.separatorButton = document.querySelector(".separator");
         this.operatorButtons = document.querySelectorAll(".operator");
         this.eraseButton = document.querySelector(".erase");
         this.clearEntryButton = document.querySelector(".clear-entry");
 
-        this.numberInput = this.numberInput.bind(this);
+        this.numberInput = this.insertNumber.bind(this);
+        this.insertDecimalSeparator = this.insertDecimalSeparator.bind(this);
         this.operatorInput = this.operatorInput.bind(this);
         this.erase = this.erase.bind(this);
         this.clearEntry = this.clearEntry.bind(this);
@@ -15,10 +17,14 @@ class Calculator {
 
         this.numberButtons.forEach((button) =>
             button.addEventListener("click", (event) => {
-                this.numberInput(event);
+                this.insertNumber(event);
                 this.displayCurrentInput();
             })
         );
+        this.separatorButton.addEventListener("click", () => {
+            this.insertDecimalSeparator();
+            this.displayCurrentInput();
+        });
         this.operatorButtons.forEach((button) =>
             button.addEventListener("click", (event) => {
                 this.operatorInput(event);
@@ -35,7 +41,7 @@ class Calculator {
         });
     }
 
-    numberInput(event) {
+    insertNumber(event) {
         const currentInput = event.currentTarget.dataset.number;
 
         // If the array is empty or if the last array item is an operator, push the digit to the array
@@ -45,6 +51,22 @@ class Calculator {
         }
         // If the last array item is a number, append the digit to it
         this.appendDigit(currentInput);
+    }
+    insertDecimalSeparator() {
+        // if last input is an operator, insert new number
+        if (this.isInputsEmpty() || this.isLastInputOperator()) {
+            this.inputs.push("");
+        }
+        // if the input is empty, insert a zero, the separator, and return
+        if (!this.getLastInput()) {
+            this.appendDigit("0");
+            this.appendDigit(".");
+        }
+        // if the last input already doesn't have a decimal operator, insert it
+
+        if (!this.getLastInput().includes(".")) {
+            this.appendDigit(".");
+        }
     }
 
     isInputsEmpty() {
