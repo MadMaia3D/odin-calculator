@@ -10,7 +10,7 @@ class Calculator {
 
         this.numberInput = this.insertNumber.bind(this);
         this.insertDecimalSeparator = this.insertDecimalSeparator.bind(this);
-        this.operatorInput = this.operatorInput.bind(this);
+        this.operatorInput = this.insertOperator.bind(this);
         this.erase = this.erase.bind(this);
         this.clearEntry = this.clearEntry.bind(this);
         this.displayCurrentInput = this.displayCurrentInput.bind(this);
@@ -27,7 +27,7 @@ class Calculator {
         });
         this.operatorButtons.forEach((button) =>
             button.addEventListener("click", (event) => {
-                this.operatorInput(event);
+                this.insertOperator(event);
                 this.displayCurrentInput();
             })
         );
@@ -95,8 +95,8 @@ class Calculator {
         this.inputs[lastIndex] += digit;
     }
 
-    operatorInput(event) {
-        this.currentInput = event.currentTarget.dataset.operation;
+    insertOperator(event) {
+        const currentInput = event.currentTarget.dataset.operation;
 
         // If the array is empty, don't do anything
         if (this.isInputsEmpty()) {
@@ -104,11 +104,11 @@ class Calculator {
         }
         // If the last array item is a number, push the operator to the array
         if (this.isLastInputNumeric()) {
-            this.inputs.push(this.currentInput);
+            this.inputs.push(currentInput);
         }
         // If the last array items is an operator, substitute it with the new operator
         if (this.isLastInputOperator()) {
-            this.setLastInput(this.currentInput);
+            this.setLastInput(currentInput);
         }
     }
 
