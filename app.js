@@ -17,19 +17,23 @@ class Calculator {
         this.clearAll = this.clearAll.bind(this);
         this.clearEntry = this.clearEntry.bind(this);
         this.displayCurrentInput = this.displayCurrentInput.bind(this);
+        this.getInputAsString = this.getInputAsString.bind(this);
 
         this.numberButtons.forEach((button) =>
             button.addEventListener("click", (event) => {
+                if (this.getInputAsString().length >= 20) return;
                 this.insertNumber(event);
                 this.displayCurrentInput();
             })
         );
         this.separatorButton.addEventListener("click", () => {
+            if (this.getInputAsString().length >= 20) return;
             this.insertDecimalSeparator();
             this.displayCurrentInput();
         });
         this.operatorButtons.forEach((button) =>
             button.addEventListener("click", (event) => {
+                if (this.getInputAsString().length >= 20) return;
                 this.insertOperator(event);
                 this.displayCurrentInput();
             })
@@ -157,7 +161,7 @@ class Calculator {
     }
 
     displayCurrentInput() {
-        let displayValue = this.inputs.join("");
+        let displayValue = this.getInputAsString();
 
         const divisionSymbol = "\u{00F7}";
         const multiplicationSymbol = "\u{00D7}";
@@ -165,6 +169,10 @@ class Calculator {
         displayValue = displayValue.replace(/\//g, divisionSymbol);
         displayValue = displayValue.replace(/\*/g, multiplicationSymbol);
         this.displayTopRow.textContent = displayValue;
+    }
+
+    getInputAsString() {
+        return this.inputs.join("");
     }
 }
 
