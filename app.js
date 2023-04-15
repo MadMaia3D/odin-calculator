@@ -18,22 +18,23 @@ class Calculator {
         this.clearEntry = this.clearEntry.bind(this);
         this.displayCurrentInput = this.displayCurrentInput.bind(this);
         this.getInputAsString = this.getInputAsString.bind(this);
+        this.isInputsTooBig = this.isInputsTooBig.bind(this);
 
         this.numberButtons.forEach((button) =>
             button.addEventListener("click", (event) => {
-                if (this.getInputAsString().length >= 20) return;
+                if (this.isInputsTooBig()) return;
                 this.insertNumber(event);
                 this.displayCurrentInput();
             })
         );
         this.separatorButton.addEventListener("click", () => {
-            if (this.getInputAsString().length >= 20) return;
+            if (this.isInputsTooBig()) return;
             this.insertDecimalSeparator();
             this.displayCurrentInput();
         });
         this.operatorButtons.forEach((button) =>
             button.addEventListener("click", (event) => {
-                if (this.getInputAsString().length >= 20) return;
+                if (this.isInputsTooBig()) return;
                 this.insertOperator(event);
                 this.displayCurrentInput();
             })
@@ -170,6 +171,9 @@ class Calculator {
     }
     getInputAsString() {
         return this.inputs.join("");
+    }
+    isInputsTooBig(limit = 20) {
+        return this.getInputAsString().length >= limit;
     }
 }
 
