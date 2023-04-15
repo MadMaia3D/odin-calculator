@@ -147,7 +147,13 @@ class Calculator {
     }
 
     displayCurrentInput() {
-        const displayValue = this.inputs.join(" ");
+        let displayValue = this.inputs.join(" ");
+
+        const divisionSymbol = "\u{00F7}";
+        const multiplicationSymbol = "\u{00D7}";
+
+        displayValue = displayValue.replace(/\//g, divisionSymbol);
+        displayValue = displayValue.replace(/\*/g, multiplicationSymbol);
         this.displayTopRow.textContent = displayValue;
     }
 }
