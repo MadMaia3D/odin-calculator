@@ -19,11 +19,35 @@ class Calculator {
     numberInput(event) {
         this.currentInput += event.currentTarget.dataset.number;
         this.logCurrentInput();
+
+        // If the last array item is a number, append the digit to it
+        // If the last array item is an operator, push the digit to the array
+    }
+
+    operatorInput(event) {
+        this.input = event.currentTarget.dataset.operation;
+        console.log(input);
+        // If the array is empty, don't do anything
+        // If the last array item is a number, push the operator to the array
+        // If the last array items is an operator, substitute it with the new operator
+    }
+
+    equals() {
+        // if array is empty don't do nothing, just return
+        // if last item on the array is an operator, delete it before continuing
+        // now if array has more than one item, calculate the equation stored in the array
+        // else if array has only one item, the result is the item itself
     }
 
     erase() {
         this.currentInput = this.currentInput.slice(0, -1);
         this.logCurrentInput();
+        /*
+        If the array is empty, don't do anything
+        - If the last array item is an operator, delete it
+           - else if the last array item is not empty, erase the last digit of it
+               - if the last array item is empty, delete it
+        */
     }
 
     clearEntry() {
