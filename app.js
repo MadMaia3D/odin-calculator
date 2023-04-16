@@ -205,9 +205,7 @@ class Calculator {
         return !isNaN(lastInput);
     }
     isLastInputOperator() {
-        const lastInput = this.getLastInput();
-        const regexp = new RegExp(/[/*\-+]/g);
-        return regexp.test(lastInput);
+        return this.isInputOperator(this.inputs.length - 1);
     }
     isInputOperator(index) {
         const input = this.inputs[index];
