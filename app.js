@@ -106,6 +106,19 @@ class Calculator {
         // else if array has only one item, the result is the item itself
     }
 
+    calculate() {
+        // if array is empty don't do nothing, just return
+        if (this.isInputsEmpty()) return;
+        // if last item on the array is an operator, delete it before continuing
+        if (this.isLastInputOperator()) this.inputs.pop();
+        //if there is division by zero, do not do the calculations
+        if (this.hasDivisionByZero()) {
+            console.error("input contains division by zero");
+            return;
+        }
+        this.inputs = this.calculateDivisions();
+        this.inputs = this.calculateMultiplications();
+    }
     calculateDivisions() {
         let equation = this.inputs;
         while (equation.includes("/")) {
