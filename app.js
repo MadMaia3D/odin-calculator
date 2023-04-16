@@ -5,6 +5,7 @@ class Calculator {
         this.numberButtons = document.querySelectorAll(".number");
         this.separatorButton = document.querySelector(".separator");
         this.operatorButtons = document.querySelectorAll(".operator");
+        this.equalsButton = document.querySelector(".equals");
         this.eraseButton = document.querySelector(".erase");
         this.clearButton = document.querySelector(".clear");
         this.clearEntryButton = document.querySelector(".clear-entry");
@@ -19,6 +20,7 @@ class Calculator {
         this.displayCurrentInput = this.displayCurrentInput.bind(this);
         this.getInputAsString = this.getInputAsString.bind(this);
         this.isInputsTooBig = this.isInputsTooBig.bind(this);
+        this.calculate = this.calculate.bind(this);
 
         this.numberButtons.forEach((button) =>
             button.addEventListener("click", (event) => {
@@ -39,6 +41,10 @@ class Calculator {
                 this.displayCurrentInput();
             })
         );
+        this.equalsButton.addEventListener("click", () => {
+            this.calculate();
+            this.displayCurrentInput();
+        });
         this.eraseButton.addEventListener("click", () => {
             this.erase();
             this.displayCurrentInput();
