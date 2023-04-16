@@ -138,6 +138,11 @@ class Calculator {
         this.displayTopRow.textContent = displayValue;
     }
 
+    hasDivisionByZero() {
+        const stringInput = this.getInputAsString();
+        if (stringInput.includes("/0")) return true;
+        return false;
+    }
     clearAll() {
         this.inputs = [];
     }
