@@ -209,6 +209,11 @@ class Calculator {
         const regexp = new RegExp(/[/*\-+]/g);
         return regexp.test(lastInput);
     }
+    isInputOperator(index) {
+        const input = this.inputs[index];
+        const regexp = new RegExp(/[/*\-+]/g);
+        return regexp.test(input);
+    }
     getLastInput() {
         const lastIndex = this.inputs.length - 1;
         const lastInput = this.inputs[lastIndex];
