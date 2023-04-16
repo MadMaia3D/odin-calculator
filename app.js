@@ -106,6 +106,20 @@ class Calculator {
         // else if array has only one item, the result is the item itself
     }
 
+    calculateDivisions() {
+        let equation = this.inputs;
+        while (equation.includes("/")) {
+            const operatorIndex = equation.indexOf("/");
+            const lhsIndex = operatorIndex - 1;
+            const rhsIndex = operatorIndex + 1;
+            const leftHandSide = Number(equation[lhsIndex]);
+            const rightHandSide = Number(equation[rhsIndex]);
+            const result = leftHandSide / rightHandSide;
+            const insertionIndex = lhsIndex;
+            equation.splice(insertionIndex, 3, result.toString());
+        }
+        return equation;
+    }
     erase() {
         // If the array is empty, don't do anything
         if (this.isInputsEmpty()) {
