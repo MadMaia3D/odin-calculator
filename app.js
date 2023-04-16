@@ -124,6 +124,8 @@ class Calculator {
         }
         this.inputs = this.calculateDivisions();
         this.inputs = this.calculateMultiplications();
+        this.inputs = this.calculateSubtraction();
+        this.inputs = this.calculateAddition();
     }
     calculateDivisions() {
         let equation = this.inputs;
@@ -150,6 +152,36 @@ class Calculator {
             const result = leftHandSide * rightHandSide;
             const insertionIndex = lhsIndex;
             equation.splice(insertionIndex, 3, result.toString());
+        }
+        return equation;
+    }
+    calculateSubtraction() {
+        let equation = this.inputs;
+        while (equation.includes("-")) {
+            const operatorIndex = equation.indexOf("-");
+            const lhsIndex = operatorIndex - 1;
+            const rhsIndex = operatorIndex + 1;
+            const leftHandSide = Number(equation[lhsIndex]);
+            const rightHandSide = Number(equation[rhsIndex]);
+            const result = leftHandSide - rightHandSide;
+            const insertionIndex = lhsIndex;
+            equation.splice(insertionIndex, 3, result.toString());
+            // if there is a plus sign before a negative result, delete it
+        }
+        return equation;
+    }
+    calculateAddition() {
+        let equation = this.inputs;
+        while (equation.includes("+")) {
+            const operatorIndex = equation.indexOf("+");
+            const lhsIndex = operatorIndex - 1;
+            const rhsIndex = operatorIndex + 1;
+            const leftHandSide = Number(equation[lhsIndex]);
+            const rightHandSide = Number(equation[rhsIndex]);
+            const result = leftHandSide + rightHandSide;
+            const insertionIndex = lhsIndex;
+            equation.splice(insertionIndex, 3, result.toString());
+            // if there is a plus sign before a negative result, delete it
         }
         return equation;
     }
