@@ -169,6 +169,13 @@ class Calculator {
     updateDisplayTop() {
         this.displayTop.textContent = this.previousInput;
 
+        if (this.previousInput.length > this.DISPLAY_LIMIT) {
+            this.displayTop.textContent = this.addEllipsesToNumber(
+                this.previousInput,
+                this.DISPLAY_LIMIT
+            );
+        }
+
         if (this.currentOperator) {
             let operator = this.currentOperator;
             const divisionSymbol = "\u{00F7}";
