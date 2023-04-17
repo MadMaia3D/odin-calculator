@@ -4,26 +4,36 @@ class Calculator {
         this.lastInput = "";
         this.currentOperator = "";
 
+        this.querySelectDomElements();
+        this.bindMethods();
+        this.addEventListenerToButtons();
+
+        this.clearAll();
+    }
+
+    querySelectDomElements() {
         this.displayTop = document.querySelector(".display .top-row");
         this.displayBottom = document.querySelector(".display .bottom-row");
 
         this.clearButton = document.querySelector(".function.clear");
         this.numberButtons = document.querySelectorAll(".number");
         this.separatorButton = document.querySelector(".separator");
+    }
 
+    bindMethods() {
         this.insertNumber = this.insertNumber.bind(this);
         this.insertSeparator = this.insertSeparator.bind(this);
         this.clearAll = this.clearAll.bind(this);
         this.updateDisplay = this.updateDisplay.bind(this);
+    }
 
+    addEventListenerToButtons() {
         this.numberButtons.forEach((number) => {
             number.addEventListener("click", this.insertNumber);
         });
         this.separatorButton.addEventListener("click", this.insertSeparator);
 
         this.clearButton.addEventListener("click", this.clearAll);
-
-        this.clearAll();
     }
 
     insertNumber(event) {
