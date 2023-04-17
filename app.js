@@ -18,6 +18,7 @@ class Calculator {
         this.numberButtons = document.querySelectorAll(".number");
         this.separatorButton = document.querySelector(".separator");
         this.operatorButtons = document.querySelectorAll(".operator");
+        this.equalsButton = document.querySelector(".equals");
         this.clearButton = document.querySelector(".function.clear");
         this.eraseButton = document.querySelector(".function.erase");
     }
@@ -29,6 +30,7 @@ class Calculator {
         this.updateDisplay = this.updateDisplay.bind(this);
         this.eraseLastDigit = this.eraseLastDigit.bind(this);
         this.inputOperator = this.inputOperator.bind(this);
+        this.inputEquals = this.inputEquals.bind(this);
     }
 
     addEventListenerToButtons() {
@@ -42,6 +44,7 @@ class Calculator {
         this.operatorButtons.forEach((button) => {
             button.addEventListener("click", this.inputOperator);
         });
+        this.equalsButton.addEventListener("click", this.inputEquals);
     }
 
     insertNumber(event) {
@@ -66,17 +69,40 @@ class Calculator {
         this.currentOperator = operator;
 
         const formattedInput = Number(this.currentInput).toString();
-        let displayValue = `${formattedInput}${operator}`;
 
-        const divisionSymbol = "\u{00F7}";
-        const multiplicationSymbol = "\u{00D7}";
-
-        displayValue = displayValue.replace(/\//g, divisionSymbol);
-        displayValue = displayValue.replace(/\*/g, multiplicationSymbol);
-
-        this.previousInput = displayValue;
+        this.previousInput = formattedInput;
         this.currentInput = "";
         this.updateDisplay();
+    }
+
+    inputEquals() {
+        const operator = this.currentOperator;
+        if (!operator) return;
+        this.calculate();
+    }
+
+    calculate() {
+        const operator = this.currentOperator;
+        const number1 = Number(this.previousInput);
+        const number2 = this.currentInput ? Number(this.currentInput) : 0;
+        // console.log(this.previousInput);
+        // console.log(number2);
+        let result = 0;
+        switch (operator) {
+            case "/":
+                result = number1 / number2;
+                break;
+            case "*":
+                result = number1 * number2;
+                break;
+            case "+":
+                result = number1 + number2;
+                break;
+            case "-":
+                result = number1 - number2;
+                break;
+        }
+        console.log(result);
     }
 
     updateDisplay() {
@@ -85,6 +111,15 @@ class Calculator {
             this.displayBottom.textContent = "0";
         }
         this.displayTop.textContent = this.previousInput;
+
+        if (this.currentOperator) {
+            let operator = this.currentOperator;
+            const divisionSymbol = "\u{00F7}";
+            const multiplicationSymbol = "\u{00D7}";
+            operator = operator.replace(/\//g, divisionSymbol);
+            operator = operator.replace(/\*/g, multiplicationSymbol);
+            this.displayTop.textContent += operator;
+        }
     }
 
     eraseLastDigit() {
