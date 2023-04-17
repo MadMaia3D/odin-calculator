@@ -210,6 +210,29 @@ class Calculator {
         this.currentInput = "";
         this.updateDisplay();
     }
+
+    removeLeadingZeros(string) {
+        const isStringEmpty = string === "";
+        const isStringZero = string === "0";
+        if (isStringEmpty || isStringZero) {
+            return string;
+        }
+
+        let output = string;
+        while (output[0] === "0") {
+            output = output.slice(1);
+        }
+
+        const isOutputEmpty = output === "";
+        if (isOutputEmpty) {
+            return "0";
+        }
+
+        if (output[0] === ".") {
+            output = "0" + output;
+        }
+        return output;
+    }
 }
 
 const calculator = new Calculator();
