@@ -52,11 +52,13 @@ class Calculator {
     }
 
     insertNumber(event) {
-        const pressedNumber = event.currentTarget.dataset.number;
-        if (this.currentInput === "" && pressedNumber === "0") return;
-
         if (this.currentInput.length >= this.DISPLAY_LIMIT) return;
-        this.currentInput += pressedNumber;
+
+        const pressedNumber = event.currentTarget.dataset.number;
+
+        let newNumber = this.currentInput + pressedNumber;
+        newNumber = this.removeLeadingZeros(newNumber);
+        this.currentInput = newNumber;
 
         this.updateDisplay();
     }
