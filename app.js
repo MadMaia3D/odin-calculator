@@ -81,12 +81,8 @@ class Calculator {
 
         this.currentOperator = operator;
 
-        let formattedInput;
-        if (this.currentInput.includes(".")) {
-            formattedInput = Number(this.currentInput).toString();
-        } else {
-            formattedInput = BigInt(this.currentInput).toString();
-        }
+        let formattedInput = this.removeLeadingZeros(this.currentInput);
+        formattedInput = this.removeTrailingZeros(this.currentInput);
 
         this.previousInput = formattedInput;
         this.currentInput = "";
