@@ -65,6 +65,11 @@ class Calculator {
     }
 
     inputOperator(event) {
+        if (this.currentOperator) {
+            this.inputEquals();
+            return;
+        }
+
         const operator = event.currentTarget.dataset.operation;
         this.currentOperator = operator;
 
@@ -78,31 +83,51 @@ class Calculator {
     inputEquals() {
         const operator = this.currentOperator;
         if (!operator) return;
-        this.calculate();
+        const result = this.calculate();
+        if (!result) return;
+
+        this.previousInput = "";
+        this.currentOperator = "";
+        this.currentInput = result.toString();
+        this.updateDisplay();
     }
 
     calculate() {
         const operator = this.currentOperator;
         const number1 = Number(this.previousInput);
         const number2 = this.currentInput ? Number(this.currentInput) : 0;
-        // console.log(this.previousInput);
-        // console.log(number2);
+
+        if (operator === "/" && number2 === 0) return;
+
         let result = 0;
         switch (operator) {
             case "/":
-                result = number1 / number2;
+                result = this.divide(number1, number2);
                 break;
             case "*":
-                result = number1 * number2;
+                result = this.multiply(number1, number2);
                 break;
             case "+":
-                result = number1 + number2;
+                result = this.add(number1, number2);
                 break;
             case "-":
-                result = number1 - number2;
+                result = this.subtract(number1, number2);
                 break;
         }
-        console.log(result);
+        return result;
+    }
+
+    add(number1, number2) {
+        return number1 + number2;
+    }
+    subtract(number1, number2) {
+        return number1 - number2;
+    }
+    multiply(number1, number2) {
+        return number1 * number2;
+    }
+    divide(number1, number2) {
+        return number1 / number2;
     }
 
     updateDisplay() {
