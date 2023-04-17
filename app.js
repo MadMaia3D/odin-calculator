@@ -175,9 +175,14 @@ class Calculator {
 
     updateDisplayBottom() {
         this.displayBottom.textContent = this.currentInput;
+
         if (this.currentInput === "") {
             this.displayBottom.textContent = "0";
+            this.displayBottom.classList.add("empty-input");
+        } else {
+            this.displayBottom.classList.remove("empty-input");
         }
+
         if (this.currentInput.length > this.DISPLAY_LIMIT) {
             const horizontalEllipsisSymbol = "\u{2026}";
             const displayValue = this.currentInput.slice(0, this.DISPLAY_LIMIT);

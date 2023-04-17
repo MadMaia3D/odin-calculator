@@ -42,6 +42,9 @@ body {
     font-weight: 100;
     white-space: pre-wrap;
 }
+.display .bottom-row.empty-input {
+    opacity: 50%;
+}
 
 .buttons-container {
     height: 350px;
