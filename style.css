@@ -35,12 +35,14 @@ body {
 .display .top-row {
     height: 50%;
     font-weight: 100;
+    white-space: pre-wrap;
 }
 .display .bottom-row {
     height: 50%;
-    font-weight: 500;
-    letter-spacing: 1px;
+    font-weight: 100;
+    white-space: pre-wrap;
 }
+
 .buttons-container {
     height: 350px;
     display: grid;

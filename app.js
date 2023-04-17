@@ -3,6 +3,7 @@ class Calculator {
         this.currentInput = "";
         this.previousInput = "";
         this.currentOperator = "";
+        this.DISPLAY_LIMIT = 16;
 
         this.querySelectDomElements();
         this.bindMethods();
@@ -21,6 +22,7 @@ class Calculator {
         this.equalsButton = document.querySelector(".equals");
         this.clearButton = document.querySelector(".function.clear");
         this.eraseButton = document.querySelector(".function.erase");
+        this.clearEntryButton = document.querySelector(".function.clear-entry");
     }
 
     bindMethods() {
@@ -31,6 +33,7 @@ class Calculator {
         this.eraseLastDigit = this.eraseLastDigit.bind(this);
         this.inputOperator = this.inputOperator.bind(this);
         this.inputEquals = this.inputEquals.bind(this);
+        this.clearEntry = this.clearEntry.bind(this);
     }
 
     addEventListenerToButtons() {
@@ -45,13 +48,14 @@ class Calculator {
             button.addEventListener("click", this.inputOperator);
         });
         this.equalsButton.addEventListener("click", this.inputEquals);
+        this.clearEntryButton.addEventListener("click", this.clearEntry);
     }
 
     insertNumber(event) {
         const pressedNumber = event.currentTarget.dataset.number;
         if (this.currentInput === "" && pressedNumber === "0") return;
 
-        if (this.currentInput.length >= 17) return;
+        if (this.currentInput.length >= this.DISPLAY_LIMIT) return;
         this.currentInput += pressedNumber;
 
         this.updateDisplay();
@@ -65,12 +69,16 @@ class Calculator {
     }
 
     inputOperator(event) {
-        if (this.currentOperator) {
-            this.inputEquals();
+        const operator = event.currentTarget.dataset.operation;
+        if (this.currentInput === "" && this.currentOperator) {
+            this.currentOperator = operator;
+            this.updateDisplay();
             return;
         }
+        if (this.currentOperator) {
+            this.inputEquals();
+        }
 
-        const operator = event.currentTarget.dataset.operation;
         this.currentOperator = operator;
 
         const formattedInput = Number(this.currentInput).toString();
@@ -84,11 +92,26 @@ class Calculator {
         const operator = this.currentOperator;
         if (!operator) return;
         const result = this.calculate();
-        if (!result) return;
+        if (result == null) return;
+
+        if (result === 0) {
+            this.currentInput = "";
+        } else {
+            this.currentInput = result.toString();
+        }
 
         this.previousInput = "";
         this.currentOperator = "";
-        this.currentInput = result.toString();
+        this.updateDisplay();
+    }
+
+    eraseLastDigit() {
+        if (this.currentInput === "0.") {
+            this.currentInput = "";
+        }
+        if (this.currentInput.length > 0) {
+            this.currentInput = this.currentInput.slice(0, -1);
+        }
         this.updateDisplay();
     }
 
@@ -113,6 +136,8 @@ class Calculator {
             case "-":
                 result = this.subtract(number1, number2);
                 break;
+            default:
+                result = null;
         }
         return result;
     }
@@ -131,10 +156,11 @@ class Calculator {
     }
 
     updateDisplay() {
-        this.displayBottom.textContent = this.currentInput;
-        if (this.currentInput === "") {
-            this.displayBottom.textContent = "0";
-        }
+        this.updateDisplayBottom();
+        this.updateDisplayTop();
+    }
+
+    updateDisplayTop() {
         this.displayTop.textContent = this.previousInput;
 
         if (this.currentOperator) {
@@ -147,20 +173,31 @@ class Calculator {
         }
     }
 
-    eraseLastDigit() {
-        if (this.currentInput === "0.") {
-            this.currentInput = "";
+    updateDisplayBottom() {
+        this.displayBottom.textContent = this.currentInput;
+        if (this.currentInput === "") {
+            this.displayBottom.textContent = "0";
         }
-        if (this.currentInput.length > 0) {
-            this.currentInput = this.currentInput.slice(0, -1);
+        if (this.currentInput.length > this.DISPLAY_LIMIT) {
+            const horizontalEllipsisSymbol = "\u{2026}";
+            const displayValue = this.currentInput.slice(0, this.DISPLAY_LIMIT);
+            this.displayBottom.textContent = displayValue;
+            this.displayBottom.textContent += horizontalEllipsisSymbol;
+        } else {
+            this.displayBottom.textContent += " ";
         }
-        this.updateDisplay();
     }
 
     clearAll() {
+        this.displayBottom.classList.remove("show-error");
         this.currentInput = "";
         this.previousInput = "";
         this.currentOperator = "";
+        this.updateDisplay();
+    }
+
+    clearEntry() {
+        this.currentInput = "";
         this.updateDisplay();
     }
 }
