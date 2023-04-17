@@ -70,6 +70,9 @@ class Calculator {
 
     inputOperator(event) {
         const operator = event.currentTarget.dataset.operation;
+        if (this.currentInput === "" && this.previousInput === "") {
+            return;
+        }
         if (this.currentInput === "" && this.currentOperator) {
             this.currentOperator = operator;
             this.updateDisplay();
