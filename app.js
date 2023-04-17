@@ -21,6 +21,7 @@ class Calculator {
     }
 
     inputNumber(event) {
+        if (this.currentInput.length >= 17) return;
         this.currentInput += event.currentTarget.dataset.number;
         this.updateDisplay();
     }
