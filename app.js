@@ -190,10 +190,10 @@ class Calculator {
         }
 
         if (this.currentInput.length > this.DISPLAY_LIMIT) {
-            const horizontalEllipsisSymbol = "\u{2026}";
-            const displayValue = this.currentInput.slice(0, this.DISPLAY_LIMIT);
-            this.displayBottom.textContent = displayValue;
-            this.displayBottom.textContent += horizontalEllipsisSymbol;
+            this.displayBottom.textContent = this.addEllipsesToNumber(
+                this.currentInput,
+                this.DISPLAY_LIMIT
+            );
         } else {
             this.displayBottom.textContent += " ";
         }
@@ -210,6 +210,13 @@ class Calculator {
     clearEntry() {
         this.currentInput = "";
         this.updateDisplay();
+    }
+
+    addEllipsesToNumber(number, maxSize) {
+        const horizontalEllipsisSymbol = "\u{2026}";
+        let value = number.slice(0, maxSize);
+        value += horizontalEllipsisSymbol;
+        return value;
     }
 
     removeLeadingZeros(string) {
