@@ -233,6 +233,28 @@ class Calculator {
         }
         return output;
     }
+    removeTrailingZeros(string) {
+        const isStringEmpty = string === "";
+        const isStringZero = string === "0";
+        const isStringNotDecimal = !string.includes(".");
+        if (isStringEmpty || isStringZero || isStringNotDecimal) {
+            return string;
+        }
+
+        let output = string;
+        while (output[output.length - 1] === "0") {
+            output = output.slice(0, -1);
+        }
+
+        if (output[output.length - 1] === ".") {
+            output = output.slice(0, -1);
+        }
+
+        if (output == "") {
+            return "0";
+        }
+        return output;
+    }
 }
 
 const calculator = new Calculator();
