@@ -15,9 +15,10 @@ class Calculator {
         this.displayTop = document.querySelector(".display .top-row");
         this.displayBottom = document.querySelector(".display .bottom-row");
 
-        this.clearButton = document.querySelector(".function.clear");
         this.numberButtons = document.querySelectorAll(".number");
         this.separatorButton = document.querySelector(".separator");
+        this.clearButton = document.querySelector(".function.clear");
+        this.eraseButton = document.querySelector(".function.erase");
     }
 
     bindMethods() {
@@ -25,15 +26,17 @@ class Calculator {
         this.insertSeparator = this.insertSeparator.bind(this);
         this.clearAll = this.clearAll.bind(this);
         this.updateDisplay = this.updateDisplay.bind(this);
+        this.eraseLastDigit = this.eraseLastDigit.bind(this);
     }
 
     addEventListenerToButtons() {
         this.numberButtons.forEach((number) => {
             number.addEventListener("click", this.insertNumber);
         });
-        this.separatorButton.addEventListener("click", this.insertSeparator);
 
+        this.separatorButton.addEventListener("click", this.insertSeparator);
         this.clearButton.addEventListener("click", this.clearAll);
+        this.eraseButton.addEventListener("click", this.eraseLastDigit);
     }
 
     insertNumber(event) {
@@ -58,6 +61,16 @@ class Calculator {
         if (this.currentInput === "") {
             this.displayBottom.textContent = "0";
         }
+    }
+
+    eraseLastDigit() {
+        if (this.currentInput === "0.") {
+            this.currentInput = "";
+        }
+        if (this.currentInput.length > 0) {
+            this.currentInput = this.currentInput.slice(0, -1);
+        }
+        this.updateDisplay();
     }
 
     clearAll() {
