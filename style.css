@@ -7,7 +7,8 @@
     /* outline: 1px solid red; */
 }
 :root {
-    --color-background: gray;
+    --color-background-1: #aaa;
+    --color-background-2: #888;
     --color-calculator-body: #111;
     --color-calculator-display: #222;
     --color-calculator-button: #333;
@@ -21,7 +22,10 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: var(--color-background);
+    background: radial-gradient(
+        var(--color-background-1),
+        var(--color-background-2)
+    );
 }
 
 .calculator-body {
