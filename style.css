@@ -6,24 +6,32 @@
     box-sizing: border-box;
     /* outline: 1px solid red; */
 }
-
+:root {
+    --color-background: gray;
+    --color-calculator-body: #111;
+    --color-calculator-display: #222;
+    --color-calculator-button: #333;
+    --color-calculator-button-hover: #444;
+    --color-calculator-button-active: #888;
+    --color-calculator-button-number: #fff;
+}
 body {
     font-family: "Roboto Mono", sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: gray;
+    background: var(--color-background);
 }
 
 .calculator-body {
     width: 350px;
     padding: 20px;
     border-radius: 10px;
-    background-color: #111;
+    background-color: var(--color-calculator-body);
 }
 .display {
-    background-color: #222;
+    background-color: var(--color-calculator-display);
     height: 80px;
     border-radius: 10px;
     margin-bottom: 10px;
@@ -56,17 +64,17 @@ body {
 button {
     font-family: "Roboto", sans-serif;
     box-shadow: 1px 2px 3px 1px black;
-    background-color: #333;
-    color: #fff;
+    background-color: var(--color-calculator-button);
+    color: var(--color-calculator-button-number);
     font-size: 1.5rem;
     border-radius: 10px;
     border: none;
 }
 button:hover {
-    background-color: #444;
+    background-color: var(--color-calculator-button-hover);
 }
 button:active {
-    background-color: #888;
+    background-color: var(--color-calculator-button-active);
 }
 [data-number="0"] {
     grid-column-start: 1;
